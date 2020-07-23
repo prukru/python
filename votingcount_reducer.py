@@ -7,24 +7,25 @@ Vote_count = 0
 
 for line in sys.stdin:
 
-    line = line.strip()
-    Candidate, count = line.split("\t")
+    line = line.strip()
+    Candidate, count = line.split("\t")
 
-    count = int(count)
-    # if this is the first iteration
-    if not last_Candidate:
-        last_Candidate = Candidate
+    count = int(count)
+    # if this is the first iteration
+    if not last_Candidate:
+        last_Candidate = Candidate
 
-    # if they're the same, log it
-    if Candidate == last_Candidate:
-        Vote_count += count
-    else:
-        # 
-        result = [last_Candidate, Vote_count]
-        if Vote_count > 1:
-           print("\t".join(str(v) for v in result))
-        last_Candidate = Candidate
-        Vote_count = 1
+    # if they're the same, count the votes
+    if Candidate.strip() == last_Candidate.strip():
+        Vote_count += count
+    else:
 
-# this is to catch the final value that we output
+        result = [last_Candidate, Vote_count]
+
+        if Vote_count > 1:
+           print("\t".join(str(v) for v in result))
+        last_Candidate = Candidate
+        Vote_count = 1
+
+# this is for the display of  the final value that we output
 print("\t".join(str(v) for v in [last_Candidate, Vote_count]))
